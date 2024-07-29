@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Weight Units Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2> Omar NODCAR Online Weight Units Converter</h2>
+
+<label for="inputValue">Enter value:</label>
+<input type="number" id="inputValue" placeholder="Enter the weight value" step="any">
+
+<label for="fromUnit">From unit:</label>
+<select id="fromUnit">
+    <option value="mg">Milligram (mg)</option>
+    <option value="g">Gram (g)</option>
+    <option value="kg">Kilogram (kg)</option>
+    <option value="t">Metric Ton (t)</option>
+    <option value="µg">Microgram (µg)</option>
+    <option value="ng">Nanogram (ng)</option>
+    <option value="pg">Picogram (pg)</option>
+    <option value="lb">Pound (lb)</option>
+    <option value="oz">Ounce (oz)</option>
+    <option value="st">Stone (st)</option>
+    <option value="tn">Short Ton (US)</option>
+    <option value="long tn">Long Ton (UK)</option>
+    <option value="ct">Carat (ct)</option>
+    <option value="gr">Grain (gr)</option>
+    <option value="ozt">Troy Ounce (ozt)</option>
+</select>
+
+<label for="toUnit">To unit:</label>
+<select id="toUnit">
+    <option value="mg">Milligram (mg)</option>
+    <option value="g">Gram (g)</option>
+    <option value="kg">Kilogram (kg)</option>
+    <option value="t">Metric Ton (t)</option>
+    <option value="µg">Microgram (µg)</option>
+    <option value="ng">Nanogram (ng)</option>
+    <option value="pg">Picogram (pg)</option>
+    <option value="lb">Pound (lb)</option>
+    <option value="oz">Ounce (oz)</option>
+    <option value="st">Stone (st)</option>
+    <option value="tn">Short Ton (US)</option>
+    <option value="long tn">Long Ton (UK)</option>
+    <option value="ct">Carat (ct)</option>
+    <option value="gr">Grain (gr)</option>
+    <option value="ozt">Troy Ounce (ozt)</option>
+</select>
+
+<button onclick="convert()">Convert</button>
+
+<h3>Result: <span id="result"></span></h3>
+
+<script>
+    const conversionRates = {
+        mg: 0.000001,
+        g: 0.001,
+        kg: 1,
+        t: 1000,
+        µg: 0.000000001,
+        ng: 0.000000000001,
+        pg: 0.000000000000001,
+        lb: 0.453592,
+        oz: 0.0283495,
+        st: 6.35029,
+        tn: 907.185,
+        'long tn': 1016.05,
+        ct: 0.0002,
+        gr: 0.0000648,
+        ozt: 0.0311035
+    };
+
+    function convert() {
+        const inputValue = parseFloat(document.getElementById('inputValue').value);
+        const fromUnit = document.getElementById('fromUnit').value;
+        const toUnit = document.getElementById('toUnit').value;
+
+        if (isNaN(inputValue)) {
+            alert('Please enter a valid number');
+            return;
+        }
+
+        // Convert the input value to kilograms first
+        const valueInKg = inputValue * conversionRates[fromUnit];
+
+        // Convert from kilograms to the target unit
+        const convertedValue = valueInKg / conversionRates[toUnit];
+
+        document.getElementById('result').textContent = convertedValue.toFixed(6) + ' ' + toUnit;
+    }
+</script>
+
+</body>
+</html>
